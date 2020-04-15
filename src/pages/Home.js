@@ -5,7 +5,7 @@ import SelectArea from './components/SelectArea'
 import SelectLegue from './components/SelectLegue'
 
 
-class App extends Component {
+class Home extends Component {
   state = {value:''};
 
   _handleResults = (value) =>{
