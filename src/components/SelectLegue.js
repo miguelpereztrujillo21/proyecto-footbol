@@ -7,7 +7,7 @@ const API_KEY = 'd2db0f761f994b6991f8646818a83f10'
 
 export default class SelectLegue extends Component{
 
-state = {competitions:[],competitionID : 0}
+state = {competitions:[],competitionID : ''}
 
     componentDidMount(){
         
@@ -30,21 +30,24 @@ state = {competitions:[],competitionID : 0}
     _renderCurrencies = () =>{
        
         const {competitions} = this.state
-
+        
 
         const mapeo = competitions.map
             (competition =>{
             if(competition.area.id === this.props.countryId)
             {
-                 this.state.competitionID = competition.id
-              
+                
+            // this.state.competitionID = competition.id 
+          
+               // this.setState({competitionID:competition.id})    
                     return(
                         <Option key = {competition.id}
-                        value= {competition.name}>{
+                        value= {competition.id}>{
                     competition.name
                      }</Option>
                  
                     )
+                    
             }
         })
             
@@ -58,8 +61,8 @@ state = {competitions:[],competitionID : 0}
         const selected = value
         this.setState({selected})
         console.log(`Selected: ${selected}`);
-
-        this.props.onResults(this.state.competitionID)
+        console.log(this.state.competitionID)
+       this.props.onResults(value)
         
     }
 
@@ -76,6 +79,7 @@ state = {competitions:[],competitionID : 0}
                  {this._renderCurrencies()}
              </Select>
              <p>{this.props.countryId}</p>
+       
              </div>
         )
     }

@@ -4,12 +4,15 @@ const API_KEY = 'd2db0f761f994b6991f8646818a83f10'
 
 export  default class TeamsContainer extends Component{
 
-    state = {teams:[], imageUrl:''}
+    state = {teams:[], imageUrl:'', competitionID: ''}
 
-    _fetchTeam ({id}){ 
-        id = this.props.competitionID   
-        console.log(id)
-        fetch(`https://api.football-data.org/v2/competitions/${this.props.competitionID}/teams`, {
+    
+    
+
+    componentWillReceiveProps (nextProps){
+        if(this.props.competitionID !== nextProps.competitionID|| this.props.competitionID !==undefined)
+        {
+        fetch(`https://api.football-data.org/v2/competitions/${nextProps.competitionID}/teams`, {
                 headers: new Headers({
                     "X-Auth-Token": API_KEY
             })
@@ -21,13 +24,12 @@ export  default class TeamsContainer extends Component{
                console.log(teams)
               
       })
+        console.log('1.componentWillReciveProps', nextProps)
 
+        this.setState({competitionID:this.props.competitionID})
     }
-    componentDidMount(){
-        console.log(this.props)
-        const teamID = this.props.competitionID
-        this._fetchTeam({id:teamID})
     }
+    
 
     _renderCurrencies = () =>{
        
