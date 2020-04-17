@@ -2,7 +2,7 @@
   text-align: center;
   display: a;
   background-color: darkgray;
-  height: auto;
+  height:auto;
   width: auto;
 }
 
@@ -10,7 +10,7 @@
   display: inline-flex;
   text-align: center;
   margin: 0px;
-  align-content: ce;
+
   padding: 20px;
 }
 .SelectLegue{

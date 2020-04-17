@@ -7,11 +7,10 @@ const API_KEY = 'd2db0f761f994b6991f8646818a83f10'
 
 export default class SelectLegue extends Component{
 
-state = {competitions:[], countryId:0}
+state = {competitions:[],competitionID : 0}
 
     componentDidMount(){
         
-     
         
         fetch(`https://api.football-data.org/v2/competitions`, {
                 headers: new Headers({
@@ -37,6 +36,8 @@ state = {competitions:[], countryId:0}
             (competition =>{
             if(competition.area.id === this.props.countryId)
             {
+                 this.state.competitionID = competition.id
+              
                     return(
                         <Option key = {competition.id}
                         value= {competition.name}>{
@@ -46,20 +47,24 @@ state = {competitions:[], countryId:0}
                     )
             }
         })
+            
 
         return mapeo
 
     }
 
     handleChange=(value) =>{
-
+ 
         const selected = value
         this.setState({selected})
         console.log(`Selected: ${selected}`);
-        this.setState({selected :this.props.search })
+
+        this.props.onResults(this.state.competitionID)
+        
     }
 
     render(){
+  
         return(
             <div>
          
